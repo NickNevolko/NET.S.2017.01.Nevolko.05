@@ -10,6 +10,12 @@ namespace Task1
     public class Task1
     {
         #region EuclidMethod
+        /// <summary>
+        /// Method that calculate a GCD by Euclid algorythm
+        /// </summary>
+        /// <param name="a">the first int number</param>
+        /// <param name="b">the second int number</param>
+        /// <returns>return a GCD</returns>
         private static int EuclidAlgo(int a, int b)
         {
             if (a == 0)
@@ -37,7 +43,12 @@ namespace Task1
             }
             return a + b;
         }
-
+        /// <summary>
+        /// Method that calculate a GCD by Euclid algorythm and measure the time 
+        /// </summary>
+        /// <param name="a">the first int number</param>
+        /// <param name="b">the second int number</param>
+        /// <returns>return a GCD</returns>
         public static int EuclidMethod(int a, int b)
         {
             var timer = new Stopwatch();
@@ -48,6 +59,11 @@ namespace Task1
             return res;
         }
 
+        /// <summary>
+        /// Method that calculate a GCD by Euclid algorythm and measure the time 
+        /// </summary>
+        /// <param name="arr">takes many integer parameters</param>
+        /// <returns> </returns>
         public static int EuclidMethod(params int[] arr)
         {
             var timer = new Stopwatch();
@@ -67,6 +83,12 @@ namespace Task1
         }
         #endregion
         #region SteinMethod
+        /// <summary>
+        /// Method that calculate a GCD by Euclid algorythm and measure the time 
+        /// </summary>
+        /// <param name="a">the first int</param>
+        /// <param name="b">the second int parameter</param>
+        /// <returns>returns a GCD calculated by the Stein method</returns>
         private static int SteinAlgo(int a, int b)
         {
             if (a == 0) return Math.Abs(b);
@@ -80,6 +102,12 @@ namespace Task1
             return SteinAlgo(b, Math.Abs(a - b));
         }
 
+        /// <summary>
+        /// Method that calculate a GCD by Euclid algorythm and measure the time 
+        /// </summary>
+        /// <param name="a">the first int</param>
+        /// <param name="b">the second int parameter</param>
+        /// <returns>returns a GCD calculated by the Stein method</returns>
         public static int SteinMethod(int a, int b, out double time)
         {
             var timer = new Stopwatch();
@@ -92,6 +120,11 @@ namespace Task1
             return res;
         }
 
+        /// <summary>
+        /// Method that calculate a GCD by Euclid algorythm and measure the time for many arguments
+        /// </summary>
+        /// <param name="arr">takes many parameters</param>
+        /// <returns>returns GCD by the Stein Method</returns>
         public static int SteinMethod(params int[] arr)
         {
             var timer = new Stopwatch();
