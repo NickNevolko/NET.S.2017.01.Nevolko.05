@@ -1,0 +1,30 @@
+﻿using NUnit.Framework;
+using System;
+using static Task2.Task2;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Task2Tests
+{
+    [TestFixture]
+    public class TestTask2
+    {
+        [TestCase(42.42, ExpectedResult = "0100000001000101001101011100001010001111010111000010100011110110")]
+        [TestCase(-42.42, ExpectedResult = "1100000001000101001101011100001010001111010111000010100011110110")]
+        [TestCase(173.44, ExpectedResult = "0100000001100101101011100001010001111010111000010100011110101110")]
+        [TestCase(-173.44, ExpectedResult = "1100000001100101101011100001010001111010111000010100011110101110")]
+        [TestCase(0, ExpectedResult = "0000000000000000000000000000000000000000000000000000000000000000")]
+        [TestCase(1, ExpectedResult = "0011111111110000000000000000000000000000000000000000000000000000")]
+        [TestCase(-1, ExpectedResult = "1011111111110000000000000000000000000000000000000000000000000000")]
+        [TestCase(double.MaxValue, ExpectedResult = "0111111111101111111111111111111111111111111111111111111111111111")]
+        [TestCase(double.MinValue, ExpectedResult = "1111111111101111111111111111111111111111111111111111111111111111")]
+        [TestCase(double.NaN, ExpectedResult = "1111111111111000000000000000000000000000000000000000000000000000")]
+        [TestCase(9.0 / 0, ExpectedResult = "0111111111110000000000000000000000000000000000000000000000000000")]
+        public static string GetBinaryToString_Test(double number)
+        {
+            return number.GetBinaryToString();
+        }
+    }
+}

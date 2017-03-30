@@ -49,14 +49,18 @@ namespace Task1
         /// <param name="a">the first int number</param>
         /// <param name="b">the second int number</param>
         /// <returns>return a GCD</returns>
-        public static int EuclidMethod(int a, int b)
+        public static int EuclidMethod(out double time, int a, int b)
         {
             var timer = new Stopwatch();
             timer.Start();
             int res = EuclidAlgo(a, b);
             timer.Stop();
-            double time = timer.ElapsedMilliseconds;
+            time = timer.ElapsedMilliseconds;
             return res;
+        }
+        public static int EuclidMethod(int a, int b)
+        {
+            return EuclidAlgo(a, b);
         }
 
         /// <summary>
@@ -66,8 +70,18 @@ namespace Task1
         /// <returns> </returns>
         public static int EuclidMethod(params int[] arr)
         {
+            if (arr == null) throw new ArgumentNullException(nameof(arr));
+
+            int res = 0;
+            foreach (var item in arr)
+            {
+                res = EuclidAlgo(res, item);
+            }
+            return res;
+        }
+        public static int EuclidMethod(out double time, params int[] arr)
+        {
             var timer = new Stopwatch();
-            double time;
             timer.Start();
 
             if (arr == null) throw new ArgumentNullException(nameof(arr));
@@ -96,9 +110,9 @@ namespace Task1
             if (a == b) return Math.Abs(a);
             if (a == 1) return a;
             if (b == 1) return b;
-            if (a % 2 == 0 && b % 2 == 0) return 2 * SteinMethod(a / 2, b / 2);
-            if (a % 2 == 0 && b % 2 != 0) return SteinMethod(a / 2, b);
-            if (a % 2 != 0 && b % 2 == 0) return SteinMethod(a, b / 2);
+            if (a % 2 == 0 && b % 2 == 0) return 2 * SteinAlgo(a / 2, b / 2);
+            if (a % 2 == 0 && b % 2 != 0) return SteinAlgo(a / 2, b);
+            if (a % 2 != 0 && b % 2 == 0) return SteinAlgo(a, b / 2);
             return SteinAlgo(b, Math.Abs(a - b));
         }
 
@@ -119,17 +133,22 @@ namespace Task1
             time = timer.ElapsedMilliseconds;
             return res;
         }
+        public static int SteinMethod(int a, int b)
+        {            
+            return SteinAlgo(a, b); ;
+        }
 
         /// <summary>
         /// Method that calculate a GCD by Euclid algorythm and measure the time for many arguments
         /// </summary>
         /// <param name="arr">takes many parameters</param>
         /// <returns>returns GCD by the Stein Method</returns>
-        public static int SteinMethod(params int[] arr)
+        public static int SteinMethod( out double time, params int[] arr)
         {
+            //time = 0;
             var timer = new Stopwatch();
             timer.Start();
-            double time;
+            //double time;
 
             if (arr == null) throw new ArgumentNullException(nameof(arr));
 
@@ -141,6 +160,17 @@ namespace Task1
             timer.Stop();
             time = timer.ElapsedMilliseconds;
 
+            return res;
+        }
+        public static int SteinMethod(params int[] arr)
+        {
+            if (arr == null) throw new ArgumentNullException(nameof(arr));
+
+            int res = 0;
+            foreach (var item in arr)
+            {
+                res = SteinAlgo(res, item);
+            }
             return res;
         }
         #endregion

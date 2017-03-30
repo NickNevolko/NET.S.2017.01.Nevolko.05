@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace TestTask1
 {
     [TestFixture]
-    public class TestClass
+    public class TestTask1
     {
         [TestCase(5, 10, ExpectedResult = 5)]
         [TestCase(-5, 10, ExpectedResult = 5)]
