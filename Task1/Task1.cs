@@ -6,7 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Task1
-{
+{ 
+    /// <summary>
+    /// Class that has methods for calculating GCD different ways 
+    /// </summary>
     public class Task1
     {
         #region EuclidMethod
@@ -48,21 +51,19 @@ namespace Task1
         /// </summary>
         /// <param name="a">the first int number</param>
         /// <param name="b">the second int number</param>
+        /// <param name="time">time</param>
         /// <returns>return a GCD</returns>
         public static int EuclidMethod(out double time, int a, int b)
         {
             var timer = new Stopwatch();
             timer.Start();
-            int res = EuclidAlgo(a, b);
+            int res = DelegateMethod(EuclidAlgo,a,b);
             timer.Stop();
             time = timer.ElapsedMilliseconds;
             return res;
         }
-        public static int EuclidMethod(int a, int b)
-        {
-            return EuclidAlgo(a, b);
-        }
-
+        public static int EuclidMethod(int a, int b) => DelegateMethod(EuclidAlgo, a, b);
+       
         /// <summary>
         /// Method that calculate a GCD by Euclid algorythm and measure the time 
         /// </summary>
@@ -71,13 +72,7 @@ namespace Task1
         public static int EuclidMethod(params int[] arr)
         {
             if (arr == null) throw new ArgumentNullException(nameof(arr));
-
-            int res = 0;
-            foreach (var item in arr)
-            {
-                res = EuclidAlgo(res, item);
-            }
-            return res;
+            return DelegateMethod(EuclidAlgo, arr);
         }
         public static int EuclidMethod(out double time, params int[] arr)
         {
@@ -86,16 +81,13 @@ namespace Task1
 
             if (arr == null) throw new ArgumentNullException(nameof(arr));
 
-            int res = 0;
-            foreach (var item in arr)
-            {
-                res = EuclidAlgo(res, item);
-            }
+            int res = DelegateMethod(EuclidAlgo,arr);
             timer.Stop();
             time = timer.ElapsedMilliseconds;
             return res;
         }
         #endregion
+       
         #region SteinMethod
         /// <summary>
         /// Method that calculate a GCD by Euclid algorythm and measure the time 
@@ -127,16 +119,13 @@ namespace Task1
             var timer = new Stopwatch();
             timer.Start();
 
-            int res = SteinAlgo(a, b);
+            int res = DelegateMethod(SteinAlgo,a,b);
 
             timer.Stop();
             time = timer.ElapsedMilliseconds;
             return res;
         }
-        public static int SteinMethod(int a, int b)
-        {            
-            return SteinAlgo(a, b); ;
-        }
+        public static int SteinMethod(int a, int b) => DelegateMethod(SteinAlgo, a, b);
 
         /// <summary>
         /// Method that calculate a GCD by Euclid algorythm and measure the time for many arguments
@@ -145,34 +134,26 @@ namespace Task1
         /// <returns>returns GCD by the Stein Method</returns>
         public static int SteinMethod( out double time, params int[] arr)
         {
-            //time = 0;
             var timer = new Stopwatch();
             timer.Start();
-            //double time;
 
             if (arr == null) throw new ArgumentNullException(nameof(arr));
 
-            int res = 0;
-            foreach (var item in arr)
-            {
-                res = SteinAlgo(res, item);
-            }
+            int res = DelegateMethod(SteinAlgo, arr);
             timer.Stop();
             time = timer.ElapsedMilliseconds;
-
             return res;
         }
         public static int SteinMethod(params int[] arr)
         {
             if (arr == null) throw new ArgumentNullException(nameof(arr));
-
-            int res = 0;
-            foreach (var item in arr)
-            {
-                res = SteinAlgo(res, item);
-            }
+ 
+            int res = DelegateMethod(SteinAlgo,arr);
             return res;
         }
         #endregion
+
+        private static int DelegateMethod(Func<int, int, int> func, int a, int b) => func(a, b);
+        private static int DelegateMethod(Func<int, int, int> func, params int[] arr) => arr.Aggregate(func);
     }
 }
